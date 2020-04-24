@@ -17,6 +17,7 @@ let package = Package(
             sources: ["src"],
             publicHeadersPath: "inc",
             cxxSettings: [
+                .headerSearchPath("inc_cpp"),
                 .headerSearchPath("vs2019"),
                 .headerSearchPath("src/vector"),
                 .headerSearchPath("src/vector/freetype"),
