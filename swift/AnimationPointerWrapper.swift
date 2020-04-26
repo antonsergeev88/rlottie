@@ -1,8 +1,10 @@
 import Foundation
 import RLottieCPP
 
+prefix operator *
+
 class AnimationPointerWrapper {
-    fileprivate let pointer: OpaquePointer
+    private let pointer: OpaquePointer
 
     init(path: String) throws {
         guard let pointer = lottie_animation_from_file(path) else {
@@ -28,10 +30,8 @@ class AnimationPointerWrapper {
     enum Error: Swift.Error {
         case load
     }
-}
 
-prefix operator *
-
-prefix func *(_ pointerWrapper: AnimationPointerWrapper) -> OpaquePointer {
-    pointerWrapper.pointer
+    static prefix func *(_ pointerWrapper: AnimationPointerWrapper) -> OpaquePointer {
+        pointerWrapper.pointer
+    }
 }
