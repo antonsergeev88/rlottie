@@ -3,15 +3,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "RLottie++",
+    name: "RLottie",
     products: [
         .library(
-            name: "RLottie++",
-            targets: ["RLottie++"]),
+            name: "RLottie",
+            targets: ["RLottie"]),
     ],
     targets: [
         .target(
-            name: "RLottie++",
+            name: "RLottie",
+            dependencies: ["RLottieCPP"],
+            path: "swift"
+        ),
+        .target(
+            name: "RLottieCPP",
             path: ".",
             exclude: ["src/vector/pixman/pixman-arm-neon-asm.S"],
             sources: ["src"],
