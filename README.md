@@ -1,5 +1,5 @@
 
-# rlottie
+# RLottie
 
 [![Build Status](https://travis-ci.org/Samsung/rlottie.svg?branch=master)](https://travis-ci.org/Samsung/rlottie)
 [![Build status](https://ci.appveyor.com/api/projects/status/n3xonxk1ooo6s7nr?svg=true&passingText=windows%20-%20passing)](https://ci.appveyor.com/project/smohantty/rlottie-mliua)
@@ -24,6 +24,7 @@ Here are small samples of the power of Lottie.
 </p>
 
 ## Contents
+- [Swift](#swift)
 - [Building Lottie](#building-lottie)
 	- [Meson Build](#meson-build)
 	- [Cmake Build](#cmake-build)
@@ -34,6 +35,24 @@ Here are small samples of the power of Lottie.
 - [Dynamic Property](#dynamic-property)
 - [Supported After Effects Features](#supported-after-effects-features)
 - [Issues or Feature Requests?](#issues-or-feature-requests)
+
+## Swift
+Use Swift Package Manager for adding RLottie as dependency:
+```
+.package(name: "RLottie", url: "https://github.com/antonsergeev88/rlottie.git", from: "0.1.0")
+```
+
+Render frame in buffer:
+```
+import RLottie
+
+let animationData = Data(/*get animation data*/)
+var buffer = Data(count: 100 * 100 * 4)
+guard let animation = Animation(data: animationData) else {
+    return
+}
+animation.render(frame: 5, into: &buffer, width: 100, height: 100)
+```
 
 ## Building Lottie
 rlottie supports [meson](https://mesonbuild.com/) and [cmake](https://cmake.org/) build system. rlottie is written in `C++14`. and has a public header dependency of `C++11`
