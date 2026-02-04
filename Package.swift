@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -28,6 +28,8 @@ let package = Package(
                 "src/binding/meson.build",
                 "src/lottie/CMakeLists.txt",
                 "src/lottie/meson.build",
+                "src/lottie/zip/CMakeLists.txt",
+                "src/lottie/zip/meson.build",
                 "src/meson.build",
                 "src/vector/CMakeLists.txt",
                 "src/vector/freetype/CMakeLists.txt",
@@ -45,6 +47,15 @@ let package = Package(
                 .headerSearchPath("vs2019"),
                 .headerSearchPath("src/vector"),
                 .headerSearchPath("src/vector/freetype"),
+                .unsafeFlags(["-U__ARM_NEON__"]),
+            ]
+        ),
+        .testTarget(
+            name: "RLottieTests",
+            dependencies: ["RLottie"],
+            path: "Tests/RLottieTests",
+            resources: [
+                .process("Resources"),
             ]
         ),
     ],

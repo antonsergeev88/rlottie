@@ -43,12 +43,19 @@ public struct Animation {
     }
 
     public func render(frame: Int, into data: inout Data, width: Int, height: Int) {
-        data.withContiguousMutableStorageIfAvailable {
-            $0.withMemoryRebound(to: UInt32.self) {
-                $0.baseAddress.flatMap {
-                    lottie_animation_render(*wrapper, frame, $0, width, height, width * 4)
-                }
+        data.withUnsafeMutableBytes { rawBuffer in
+            let baseAddress = rawBuffer.bindMemory(to: UInt32.self).baseAddress
+            if let baseAddress {
+                render(frame: frame, into: baseAddress, width: width, height: height, bytesPerLine: width * 4)
             }
         }
+    }
+
+    public func render(frame: Int,
+                       into buffer: UnsafeMutablePointer<UInt32>,
+                       width: Int,
+                       height: Int,
+                       bytesPerLine: Int) {
+        lottie_animation_render(*wrapper, frame, buffer, width, height, bytesPerLine)
     }
 }
