@@ -20,6 +20,7 @@ let package = Package(
             path: ".",
             exclude: [
                 "src/vector/pixman/pixman-arm-neon-asm.S",
+                "src/wasm",
                 "src/CMakeLists.txt",
                 "src/binding/CMakeLists.txt",
                 "src/binding/c/CMakeLists.txt",
